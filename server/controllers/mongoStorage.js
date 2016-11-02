@@ -24,7 +24,6 @@ function setModel(req){
     return mongoose.model(req.params.collection);
 }
 
-//*************** FUNCIONES GENERICAS *******************//
 
 //GET - Return all documents in the DB
 exports.getSearch = function(req, res) {
@@ -45,7 +44,21 @@ exports.getSearch = function(req, res) {
 
 };
 
+//POST - Insert a new Document in the DB
+exports.newSeaarch = function(req, res) {
+  var Document = mongoose.model('search');
+  console.log(new Date());
+  console.log('POST');
+	document = new Document(req.body);
+	console.log(document);
+    document.save(function(err, document) {
+		if(err) return res.status(500).send(err.message);
+    res.status(200).jsonp(document);
+	});
+};
 
+
+//*************** FUNCIONES GENERICAS *******************//
 //GET - Return all documents in the DB
 exports.findAllDocuments = function(req, res) {
     var Document = setModel(req);
@@ -77,6 +90,8 @@ exports.findById = function(req, res) {
 
 	});
 };
+
+
 
 //POST - Insert a new Document in the DB
 exports.addDocument = function(req, res) {
