@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchData } from "../actions/dataActions"
+import { fetchQueries } from "../actions/queriesActions"
 
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
@@ -8,24 +8,22 @@ import Sidebar from "./Sidebar";
 
 @connect((store) => {
   return {
-    data: store.data.data,
+    queries: store.queries.queries,
   };
 })
 export default class Layout extends React.Component {
   componentWillMount() {
-    this.props.dispatch(fetchData())
+    this.props.dispatch(fetchQueries())
   }
 
   render() {
-    const { data } = this.props;
-
-    const queries = data.map(item => <li key={item._id}>{item.query}</li>)
+    const { queries } = this.props;
 
     return  <div>
                 <Nav />
                 <div class="container-fluid">
                     <div class="row">
-                        <Sidebar queries = {queries}/>
+                        <Sidebar queries = { queries }/>
                         <Dashboard />
                     </div>
                 </div>
