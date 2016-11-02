@@ -14,7 +14,8 @@ module.exports.setup = function (app) {
     api.route('/').get( function(req, res){res.status(200).jsonp("Mercado Libre Exercise "+pjson.version);});
 
     api.route('/search/')
-        .get(mongoStorage.getSearch);
+        .get(mongoStorage.getSearch)
+        .post(mongoStorage.newSeaarch);
 
     api.route('/:collection')
         .get(mongoStorage.findAllDocuments)
