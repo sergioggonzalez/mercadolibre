@@ -15,7 +15,7 @@ module.exports.setup = function (app) {
 
     api.route('/search/')
         .get(mongoStorage.getSearch)
-        .post(mongoStorage.newSeaarch);
+        .post(mongoStorage.newSearch);
 
     api.route('/:collection')
         .get(mongoStorage.findAllDocuments)

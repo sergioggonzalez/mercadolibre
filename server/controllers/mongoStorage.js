@@ -45,7 +45,7 @@ exports.getSearch = function(req, res) {
 };
 
 //POST - Insert a new Document in the DB
-exports.newSeaarch = function(req, res) {
+exports.newSearch = function(req, res) {
   var Document = mongoose.model('search');
   console.log(new Date());
   console.log('POST');
