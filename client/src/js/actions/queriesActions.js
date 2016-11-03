@@ -1,8 +1,9 @@
 import axios from "axios";
 
-export function fetchQueries() {
+export function fetchQueries(userId) {
+  var url = "http://localhost:3000/api/search?searchid="+userId;
   return function(dispatch) {
-    axios.get("http://localhost:3000/api/search?userId=001")
+    axios.get(url)
       .then((response) => {
         dispatch({type: "FETCH_QUERIES_FULFILLED", payload: response.data})
       })
@@ -12,15 +13,22 @@ export function fetchQueries() {
   }
 }
 
-export function addQuery(id, query, userId) {
-  return {
+export function addQuery(query, userId) {
+return function(dispatch) {
+  axios.post('http://localhost:3000/api/search', {
+    query: query,
+    userId: userId
+  }).then((response) => {
+    dispatch({type: "ADD_QUERY", payload: response.data})
+  });
+}
+  /*return {
     type: 'ADD_QUERY',
     payload: {
-      id,
-      text,
+      query,
       userId,
     },
-  }
+  }*/
 }
 
 export function updateQuery(id, query, userId) {

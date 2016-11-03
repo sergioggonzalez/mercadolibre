@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchQueries } from "../actions/queriesActions"
+import { fetchQueries, addQuery } from "../actions/queriesActions"
 
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
@@ -25,8 +25,12 @@ export default class Layout extends React.Component {
     this.setState({selectedQuery});
   }
 
+  newQuery(newQuery) {
+    this.props.dispatch(addQuery(newQuery, '001'));
+  }
+
   componentWillMount() {
-    this.props.dispatch(fetchQueries());
+    this.props.dispatch(fetchQueries('001'));
   }
 
   render() {
@@ -35,7 +39,7 @@ export default class Layout extends React.Component {
                 <Nav />
                 <div class="container-fluid">
                     <div class="row">
-                        <Sidebar changeQuery={this.changeQuery.bind(this)}  queries={ queries }/>
+                        <Sidebar newQuery={this.newQuery.bind(this)} changeQuery={this.changeQuery.bind(this)}  queries={ queries }/>
                         <Dashboard  selectedQuery={this.state.selectedQuery} />
                     </div>
                 </div>

@@ -1,10 +1,19 @@
 import React from "react";
 
 
+
 export default class Sidebar extends React.Component {
 
   handleChange(title) {
     this.props.changeQuery(title);
+  }
+
+
+  handleQuery(e){
+    e.preventDefault();
+    var query = document.getElementById('queryInput').value;
+    this.props.newQuery(query);
+    document.getElementById('queryInput').value = '';
   }
 
   render() {
@@ -15,7 +24,10 @@ export default class Sidebar extends React.Component {
               <li class="active"><p>Mis búsquedas</p></li>
               <ul>{mapQueries}</ul>
           </ul>
-          <input  onChange={this.handleChange.bind(this)} />
+          <form onSubmit={this.handleQuery.bind(this)}>
+          <input id="queryInput" name="queryInput" />
+          <input type="submit" value="Nueva" />
+          </form>
       </div>
     );
   }
