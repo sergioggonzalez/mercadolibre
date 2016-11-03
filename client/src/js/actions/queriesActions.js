@@ -14,21 +14,14 @@ export function fetchQueries(userId) {
 }
 
 export function addQuery(query, userId) {
-return function(dispatch) {
-  axios.post('http://localhost:3000/api/search', {
-    query: query,
-    userId: userId
-  }).then((response) => {
-    dispatch({type: "ADD_QUERY", payload: response.data})
-  });
-}
-  /*return {
-    type: 'ADD_QUERY',
-    payload: {
-      query,
-      userId,
-    },
-  }*/
+  return function(dispatch) {
+    axios.post('http://localhost:3000/api/search', {
+      query: query,
+      userId: userId
+    }).then((response) => {
+      dispatch({type: "ADD_QUERY", payload: response.data})
+    });
+  }
 }
 
 export function updateQuery(id, query, userId) {
@@ -43,5 +36,10 @@ export function updateQuery(id, query, userId) {
 }
 
 export function deleteQuery(id) {
-  return { type: 'DELETE_QUERY', payload: id}
+  var url = "http://localhost:3000/api/search/"+id;
+  return function(dispatch){
+    axios.delete(url).then((response) => {
+      dispatch({type: "DELETE_QUERY", payload: response.data._id})
+    });
+  }
 }

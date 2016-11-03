@@ -40,7 +40,7 @@ export default function reducer(state={
       case "DELETE_QUERY": {
         return {
           ...state,
-          tweets: state.queries.filter(query => query.id !== action.payload),
+          queries: state.queries.filter(query => query._id !== action.payload),
         }
       }
     }

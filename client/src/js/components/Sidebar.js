@@ -16,8 +16,12 @@ export default class Sidebar extends React.Component {
     document.getElementById('queryInput').value = '';
   }
 
+  handleRemove(id) {
+    this.props.removeQuery(id);
+  }
+
   render() {
-    const mapQueries = this.props.queries.map(item => <li key={item._id} onClick={this.handleChange.bind(this, item.query)} ><a href="#" >{item.query}</a></li>);
+    const mapQueries = this.props.queries.map(item => <li key={item._id} onClick={this.handleChange.bind(this, item.query)} ><a href="#" >{item.query}</a><span onClick={this.handleRemove.bind(this, item._id)} class="glyphicon glyphicon-trash"></span></li>);
     return (
       <div class="col-md-4">
           <ul class="nav nav-sidebar">
