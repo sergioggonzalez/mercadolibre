@@ -17,7 +17,7 @@ export default function reducer(state={
           ...state,
           fetching: false,
           fetched: true,
-          queries: action.payload,
+          queries: action.payload
         }
       }
       case "ADD_QUERY": {
@@ -34,7 +34,7 @@ export default function reducer(state={
 
         return {
           ...state,
-          tweets: newTweets,
+          queries: newQueries,
         }
       }
       case "DELETE_QUERY": {
