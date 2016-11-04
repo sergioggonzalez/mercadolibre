@@ -33,18 +33,31 @@ export default class Sidebar extends React.Component {
   }
 
   render() {
-    const mapQueries = this.props.queries.map(item => <li key={item._id} onClick={this.handleChange.bind(this, item.query)} ><a href="#" >{item.query}</a><span onClick={this.handleEdit.bind(this, item._id, item.query)} class="glyphicon glyphicon-edit"></span><span onClick={this.handleRemove.bind(this, item._id)} class="glyphicon glyphicon-trash"></span></li>);
+    const mapQueries = this.props.queries.map(
+                                              item => <li class="list-group-item" key={item._id} onClick={this.handleChange.bind(this, item.query)} >
+                                                          <a href="#" >{item.query}</a>
+                                                          <span onClick={this.handleEdit.bind(this, item._id, item.query)} class="glyphicon glyphicon-edit"></span>
+                                                          <span onClick={this.handleRemove.bind(this, item._id)} class="glyphicon glyphicon-trash"></span>
+                                                      </li>
+                                             );
     return (
       <div class="col-md-4">
-          <ul class="nav nav-sidebar">
-              <li class="active"><p>Mis búsquedas</p></li>
-              <ul>{mapQueries}</ul>
-          </ul>
-          <form onSubmit={this.handleQuery.bind(this)}>
-          <input id="queryInput" name="queryInput" />
-          <input id="editInput" type="hidden" name="editInput" />
-          <input id="queryButton" type="submit" value="agregar" />
-          </form>
+          <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">Mis búsquedas</div>
+                <div class="panel-body">
+                    <ul class="list-group" >{mapQueries}</ul>
+                    <form onSubmit={this.handleQuery.bind(this)}>
+                    <input id="queryInput" name="queryInput" />
+                    <input id="editInput" type="hidden" name="editInput" />
+                    <input id="queryButton" type="submit" value="agregar" />
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+
       </div>
     );
   }
