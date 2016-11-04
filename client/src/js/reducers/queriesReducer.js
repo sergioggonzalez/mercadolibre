@@ -27,11 +27,10 @@ export default function reducer(state={
         }
       }
       case "UPDATE_QUERY": {
-        const { id, text, userId } = action.payload
+        const { _id, query, userId } = action.payload
         const newQueries = [...state.queries]
-        const queryToUpdate = newQueries.findIndex(query => query.id === id)
+        const queryToUpdate = newQueries.findIndex(query => query._id === _id)
         newQueries[queryToUpdate] = action.payload;
-
         return {
           ...state,
           queries: newQueries,

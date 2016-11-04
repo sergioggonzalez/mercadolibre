@@ -25,13 +25,14 @@ export function addQuery(query, userId) {
 }
 
 export function updateQuery(id, query, userId) {
-  return {
-    type: 'UPDATE_QUERY',
-    payload: {
-      id,
-      text,
-      userId,
-    },
+  return function(dispatch) {
+    var url = "http://localhost:3000/api/search/"+id;
+    axios.put(url, {
+      query: query,
+      userId: userId
+    }).then((response) => {
+      dispatch({type: "UPDATE_QUERY", payload: response.data})
+    });
   }
 }
 

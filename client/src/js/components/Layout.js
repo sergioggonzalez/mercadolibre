@@ -1,6 +1,6 @@
 import React from "react"
 import { connect } from "react-redux"
-import { fetchQueries, addQuery, deleteQuery } from "../actions/queriesActions"
+import { fetchQueries, addQuery, updateQuery, deleteQuery } from "../actions/queriesActions"
 
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
@@ -29,6 +29,10 @@ export default class Layout extends React.Component {
     this.props.dispatch(addQuery(newQuery, '001'));
   }
 
+  editQuery(id, query) {
+    this.props.dispatch(updateQuery(id, query, '001'));
+  }
+
   removeQuery(id) {
     this.props.dispatch(deleteQuery(id));
   }
@@ -44,7 +48,7 @@ export default class Layout extends React.Component {
                 <Nav />
                 <div class="container-fluid">
                     <div class="row">
-                        <Sidebar newQuery={this.newQuery.bind(this)} removeQuery={this.removeQuery.bind(this)} changeQuery={this.changeQuery.bind(this)}  queries={ queries }/>
+                        <Sidebar newQuery={this.newQuery.bind(this)} editQuery={this.editQuery.bind(this)} removeQuery={this.removeQuery.bind(this)} changeQuery={this.changeQuery.bind(this)}  queries={ queries }/>
                         <Dashboard  selectedQuery={this.state.selectedQuery} />
                     </div>
                 </div>
