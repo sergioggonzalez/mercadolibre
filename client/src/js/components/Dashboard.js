@@ -43,10 +43,10 @@ export default class Dashboard extends React.Component {
 
     return (
       <div class="col-md-8 main">
-        <h2 class="page-header">Dashboard</h2>
         <h4>Busqueda: <strong>{this.props.selectedQuery}</strong></h4>
 
         <div class="panel panel-default">
+            <div class="panel-heading">Cantidad de Unidades Disponibles vs Unidades vendidas</div>
             <div class="panel-body">
             <LineChart width={600} height={300} data={lineData}
                   margin={{top: 5, right: 30, left: 20, bottom: 5}}>
@@ -61,6 +61,7 @@ export default class Dashboard extends React.Component {
             </div>
         </div>
         <div class="panel panel-default">
+            <div class="panel-heading">Nuevos vs Usados</div>
             <div class="panel-body">
               <PieChart width={800} height={400}>
                 <Pie isAnimationActive={false} data={pieData1} cx={200} cy={200} outerRadius={80} fill="#8884d8" label/>
@@ -69,6 +70,7 @@ export default class Dashboard extends React.Component {
             </div>
         </div>
         <div class="panel panel-default">
+            <div class="panel-heading">Envío Gratis</div>
             <div class="panel-body">
               <PieChart width={800} height={400}>
                 <Pie isAnimationActive={false} data={pieData2} cx={200} cy={200} outerRadius={80} fill="#8884d8" label/>
@@ -77,6 +79,7 @@ export default class Dashboard extends React.Component {
             </div>
         </div>
         <div class="panel panel-default">
+            <div class="panel-heading">Item por localidad</div>
             <div class="panel-body">
             <RadialBarChart width={500} height={300} cx={150} cy={150} innerRadius={20} outerRadius={140} barSize={10} data={radialData}>
             <RadialBar minAngle={15} label background clockWise={true} dataKey='uv'/>

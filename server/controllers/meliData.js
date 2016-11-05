@@ -1,6 +1,8 @@
 var express         = require("express"),
     app             = express(),
+    mongoStorage    = require('./mongoStorage'),
     axios           = require("axios");
+
 
 exports.getData = function(req, res) {
     var url = 'https://api.mercadolibre.com/sites/MLA/search?q='+req.params.query;
@@ -8,6 +10,7 @@ exports.getData = function(req, res) {
     .then(function (response) {
       var data = processData(response.data);
       var result = {'query':req.params.query, 'results':data}
+      mongoStorage.storeMeliData(result);
       res.status(200).jsonp(result);
     })
     .catch(function (error) {
@@ -28,7 +31,7 @@ function processData(data){
 
   for(var item in resultados){
     //Precios y ventas
-    prices.push({'Item': resultados[item].title, 'price': resultados[item].price, 'sold': resultados[item].sold_quantity});
+    prices.push({'Item': resultados[item].title, 'price': resultados[item].available_quantity, 'sold': resultados[item].sold_quantity});
 
     //Nuevos vs Usado
     if(resultados[item].condition == 'new'){

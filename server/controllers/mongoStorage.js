@@ -57,6 +57,36 @@ exports.newSearch = function(req, res) {
 	});
 };
 
+exports.storeMeliData = function(data) {
+    var Document = mongoose.model('data');
+    document = new Document(data);
+    document.save(function(err, document) {
+        if(err) console.log(err);
+        return document;
+    });
+};
+
+//GET - Stored meliData
+exports.getStoredMeliData = function(req, res) {
+    var Document = mongoose.model('data');
+    var query = Document.findOne({})
+    query.where("query", req.params.query)
+
+    query.lean()
+    query.exec(function(err, result){
+
+    if(err) res.send(500, err.message);
+
+    if(result == null){
+      //res.redirect('/newdata/'+req.params.query);
+    }
+
+      console.log(new Date());
+      console.log('GET /data');
+      res.status(200).jsonp(result);
+    });
+
+};
 
 //*************** FUNCIONES GENERICAS *******************//
 //GET - Return all documents in the DB
