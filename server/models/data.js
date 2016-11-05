@@ -8,5 +8,8 @@ exports = module.exports = function(app, mongoose) {
         results:          Schema.Types.Mixed,
    	});
 
+	dataSchema.set('redisCache', true);
+  dataSchema.set('expires', 30);
+
 	mongoose.model('data', dataSchema);
 };

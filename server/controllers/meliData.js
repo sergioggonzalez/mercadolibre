@@ -4,18 +4,18 @@ var express         = require("express"),
     axios           = require("axios");
 
 
-exports.getData = function(req, res) {
-    var url = 'https://api.mercadolibre.com/sites/MLA/search?q='+req.params.query;
+exports.getData = function(query) {
+    var url = 'https://api.mercadolibre.com/sites/MLA/search?q='+query;
     axios.get(url)
     .then(function (response) {
       var data = processData(response.data);
-      var result = {'query':req.params.query, 'results':data}
+      var result = {'query':query, 'results':data}
       mongoStorage.storeMeliData(result);
-      res.status(200).jsonp(result);
+      return result;
     })
     .catch(function (error) {
       console.log(error);
-      res.status(500).jsonp(error);
+      //res.status(500).jsonp(error);
     });
 };
 

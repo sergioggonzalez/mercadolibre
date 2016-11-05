@@ -1,7 +1,8 @@
-var express         = require("express"),
-    app             = express();
-var mongoose = require('mongoose');
-var mongooseRedisCache = require("mongoose-redis-cache");
+var express             = require("express"),
+    app                 = express();
+var meliData            = require('./meliData');
+var mongoose            = require('mongoose');
+var mongooseRedisCache  = require("mongoose-redis-cache");
 
 var config          = require('../config').conf;
 
@@ -75,15 +76,20 @@ exports.getStoredMeliData = function(req, res) {
     query.lean()
     query.exec(function(err, result){
 
+    //TODO: Usar Promises en este flujo  
     if(err) res.send(500, err.message);
 
-    if(result == null){
-      //res.redirect('/newdata/'+req.params.query);
-    }
-
+    if(result != null){
       console.log(new Date());
       console.log('GET /data');
       res.status(200).jsonp(result);
+
+    }else{
+      var newData = meliData.getData(req.params.query);
+      res.status(200).jsonp(newData);
+    }
+
+
     });
 
 };
