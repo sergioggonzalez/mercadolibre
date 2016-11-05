@@ -2,10 +2,6 @@ var express         = require("express"),
     app             = express(),
     axios           = require("axios");
 
-
-
-
-
 exports.getData = function(req, res) {
     var url = 'https://api.mercadolibre.com/sites/MLA/search?q='+req.params.query;
     axios.get(url)
@@ -23,16 +19,13 @@ exports.getData = function(req, res) {
 
 function processData(data){
   var resultados = data.results;
+  var processedData = [];
   var prices = [];
   var condition = {'Nuevo': 0, 'Usado': 0};
   var shipping = {'Si': 0, 'No': 0};
   var adress = [];
 
 
-  //available_quantity
-  //sold_quantity
-  //address.state_name
-  //shipping.free_shipping
   for(var item in resultados){
     //Precios y ventas
     prices.push({'Item': resultados[item].title, 'price': resultados[item].price, 'sold': resultados[item].sold_quantity});
@@ -60,5 +53,11 @@ function processData(data){
      var loc = adress[i];
      addressCount[loc] = addressCount[loc] ? addressCount[loc]+1 : 1;
   }
-  return {prices, condition, shipping, addressCount};
+
+  processedData.push({'type':'prices', 'stats':prices });
+  processedData.push({'type':'condition', 'stats':condition });
+  processedData.push({'type':'shipping', 'stats':shipping });
+  processedData.push({'type':'address', 'stats':addressCount });
+
+  return processedData;
 }

@@ -1,6 +1,7 @@
 import React from "react"
 import { connect } from "react-redux"
 import { fetchQueries, addQuery, updateQuery, deleteQuery } from "../actions/queriesActions"
+import { fetchData } from "../actions/dataActions"
 
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
@@ -9,6 +10,7 @@ import Sidebar from "./Sidebar";
 @connect((store) => {
   return {
     queries: store.queries.queries,
+    data: store.data.data,
   };
 })
 export default class Layout extends React.Component {
@@ -23,6 +25,7 @@ export default class Layout extends React.Component {
 
   changeQuery(selectedQuery) {
     this.setState({selectedQuery});
+    this.props.dispatch(fetchData(selectedQuery));
   }
 
   newQuery(newQuery) {
@@ -39,17 +42,27 @@ export default class Layout extends React.Component {
 
   componentWillMount() {
     this.props.dispatch(fetchQueries('001'));
-    //this.props.dispatch(deleteQuery('581b8fdd1636da3f59000002'));
+    this.props.dispatch(fetchData(this.state.selectedQuery));
   }
 
   render() {
-    const { queries } = this.props;
+    const { queries, data } = this.props;
+    var results = data.results;
     return  <div>
                 <Nav />
                 <div class="container-fluid">
                     <div class="row">
-                        <Sidebar newQuery={this.newQuery.bind(this)} editQuery={this.editQuery.bind(this)} removeQuery={this.removeQuery.bind(this)} changeQuery={this.changeQuery.bind(this)}  queries={ queries }/>
-                        <Dashboard  selectedQuery={this.state.selectedQuery} />
+                        <Sidebar
+                            newQuery={this.newQuery.bind(this)}
+                            editQuery={this.editQuery.bind(this)}
+                            removeQuery={this.removeQuery.bind(this)}
+                            changeQuery={this.changeQuery.bind(this)}
+                            queries={ queries }
+                          />
+                        <Dashboard
+                        selectedQuery={this.state.selectedQuery}
+                        results={ results }
+                        />
                     </div>
                 </div>
             </div>
