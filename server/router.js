@@ -1,6 +1,7 @@
 var express         = require("express");
 var pjson           = require('./package.json');
-var mongoStorage = require('./controllers/mongoStorage');
+var mongoStorage    = require('./controllers/mongoStorage');
+var meliData        = require('./controllers/meliData');
 
 /**
  *  Sets up the routes.
@@ -17,6 +18,9 @@ module.exports.setup = function (app) {
         .get(mongoStorage.getSearch)
         .post(mongoStorage.newSearch);
 
+    api.route('/data/:query')
+        .get(meliData.getData);
+
     api.route('/:collection')
         .get(mongoStorage.findAllDocuments)
         .post(mongoStorage.addDocument);
@@ -25,8 +29,6 @@ module.exports.setup = function (app) {
         .get(mongoStorage.findById)
         .put(mongoStorage.updateDocument)
         .delete(mongoStorage.deleteDocument);
-
-
 
     app.use('/api', api);
 

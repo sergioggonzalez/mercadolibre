@@ -9,7 +9,7 @@ var config          = require('../config').conf;
 
 // Import Models
 var modelsSearch                 = require('../models/search')(app, mongoose),
-    modelsResult                 = require('../models/result')(app, mongoose);
+    modelsData                 = require('../models/data')(app, mongoose);
 
 
 // Connection to DB
