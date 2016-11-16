@@ -9,6 +9,7 @@ var express         = require("express"),
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(methodOverride());
+app.use(require('express-promise')());
 
 
 app.use(function(req, res, next) {

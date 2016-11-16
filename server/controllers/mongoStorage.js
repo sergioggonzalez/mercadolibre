@@ -54,6 +54,7 @@ exports.newSearch = function(req, res) {
 	console.log(document);
     document.save(function(err, document) {
 		if(err) return res.status(500).send(err.message);
+    meliData.getData(req.body.query);
     res.status(200).jsonp(document);
 	});
 };
@@ -76,15 +77,15 @@ exports.getStoredMeliData = function(req, res) {
     query.lean()
     query.exec(function(err, result){
 
-    //TODO: Usar Promises en este flujo  
     if(err) res.send(500, err.message);
 
     if(result != null){
       console.log(new Date());
-      console.log('GET /data');
+      console.log('GET Stored Data');
       res.status(200).jsonp(result);
-
     }else{
+      console.log(new Date());
+      console.log('GET New Data from API');
       var newData = meliData.getData(req.params.query);
       res.status(200).jsonp(newData);
     }
