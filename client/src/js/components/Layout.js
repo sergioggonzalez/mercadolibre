@@ -6,6 +6,7 @@ import { fetchData } from "../actions/dataActions"
 import Dashboard from "./Dashboard";
 import Nav from "./Nav";
 import Sidebar from "./Sidebar";
+import Login from "./Login";
 
 @connect((store) => {
   return {
@@ -52,6 +53,7 @@ export default class Layout extends React.Component {
                 <Nav />
                 <div class="container-fluid">
                     <div class="row">
+                        <Login />
                         <Sidebar
                             newQuery={this.newQuery.bind(this)}
                             editQuery={this.editQuery.bind(this)}
