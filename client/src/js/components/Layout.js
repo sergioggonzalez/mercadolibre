@@ -22,6 +22,7 @@ export default class Layout extends React.Component {
         selectedQuery: "iphone",
         selectedUserId: "001",
         selectedUserName: "Usuario Anónimo",
+        selectedUserPicture: "http://findicons.com/files/icons/2181/34al_volume_3_2_se/24/001_54.png",
       };
 
     }
@@ -31,9 +32,10 @@ export default class Layout extends React.Component {
     this.props.dispatch(fetchData(selectedQuery));
   }
 
-  changeUser(selectedUserId, selectedUserName) {
+  changeUser(selectedUserId, selectedUserName, selectedUserPicture) {
     this.setState({selectedUserId});
     this.setState({selectedUserName});
+    this.setState({selectedUserPicture});
     this.props.dispatch(fetchQueries(this.state.selectedUserId));
   }
 
@@ -65,6 +67,7 @@ export default class Layout extends React.Component {
                           <Login
                           selectedUserId={this.state.selectedUserId}
                           selectedUserName={this.state.selectedUserName}
+                          selectedUserPicture={this.state.selectedUserPicture}
                           changeUser={this.changeUser.bind(this)}
                           />
                           <Sidebar

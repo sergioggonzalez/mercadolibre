@@ -12,7 +12,7 @@ class Login extends React.Component{
     console.log(response.picture.data.url);
     if(response.id){
       console.log('Usuario logueado: '+ response.id);
-      this.props.changeUser(response.id, response.name);
+      this.props.changeUser(response.id, response.name, response.picture.data.url);
     }
     //this.props.changeQuery(title);
   };
@@ -36,6 +36,8 @@ class Login extends React.Component{
                 Bienvenido <strong>{this.props.selectedUserName}</strong>
               </div>
               <div class="panel-body">
+
+                <img  class="_s0 _7ql _ry img" src={this.props.selectedUserPicture} />
                 {button}
               </div>
             </div>
