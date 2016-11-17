@@ -20,6 +20,8 @@ export default class Layout extends React.Component {
       super(props);
       this.state = {
         selectedQuery: "iphone",
+        selectedUserId: "001",
+        selectedUserName: "Usuario Anónimo",
       };
 
     }
@@ -29,12 +31,18 @@ export default class Layout extends React.Component {
     this.props.dispatch(fetchData(selectedQuery));
   }
 
+  changeUser(selectedUserId, selectedUserName) {
+    this.setState({selectedUserId});
+    this.setState({selectedUserName});
+    this.props.dispatch(fetchQueries(this.state.selectedUserId));
+  }
+
   newQuery(newQuery) {
-    this.props.dispatch(addQuery(newQuery, '001'));
+    this.props.dispatch(addQuery(newQuery, this.state.selectedUserId));
   }
 
   editQuery(id, query) {
-    this.props.dispatch(updateQuery(id, query, '001'));
+    this.props.dispatch(updateQuery(id, query, this.state.selectedUserId));
   }
 
   removeQuery(id) {
@@ -42,7 +50,7 @@ export default class Layout extends React.Component {
   }
 
   componentWillMount() {
-    this.props.dispatch(fetchQueries('001'));
+    this.props.dispatch(fetchQueries(this.state.selectedUserId));
     this.props.dispatch(fetchData(this.state.selectedQuery));
   }
 
@@ -53,14 +61,20 @@ export default class Layout extends React.Component {
                 <Nav />
                 <div class="container-fluid">
                     <div class="row">
-                        <Login />
-                        <Sidebar
-                            newQuery={this.newQuery.bind(this)}
-                            editQuery={this.editQuery.bind(this)}
-                            removeQuery={this.removeQuery.bind(this)}
-                            changeQuery={this.changeQuery.bind(this)}
-                            queries={ queries }
+                       <div class="col-md-4">
+                          <Login
+                          selectedUserId={this.state.selectedUserId}
+                          selectedUserName={this.state.selectedUserName}
+                          changeUser={this.changeUser.bind(this)}
                           />
+                          <Sidebar
+                              newQuery={this.newQuery.bind(this)}
+                              editQuery={this.editQuery.bind(this)}
+                              removeQuery={this.removeQuery.bind(this)}
+                              changeQuery={this.changeQuery.bind(this)}
+                              queries={ queries }
+                            />
+                        </div>
                         <Dashboard
                         selectedQuery={this.state.selectedQuery}
                         results={ results }

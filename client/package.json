@@ -17,7 +17,7 @@
     "react-addons-transition-group": "^15.3.2",
     "react-d3": "^0.4.0",
     "react-dom": "^15.3.2",
-    "react-facebook-login-component": "^0.6.0",
+    "react-facebook-login": "^3.4.0",
     "react-redux": "^4.4.5",
     "recharts": "^0.16.2",
     "redux": "^3.5.2",

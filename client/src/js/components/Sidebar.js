@@ -41,20 +41,19 @@ export default class Sidebar extends React.Component {
                                                       </li>
                                              );
     return (
-      <div class="col-md-4">
-          <div class="panel-group">
-            <div class="panel panel-default">
-                <div class="panel-heading">Mis búsquedas</div>
-                <div class="panel-body">
-                    <ul class="list-group" >{mapQueries}</ul>
-                    <form onSubmit={this.handleQuery.bind(this)}>
-                    <input id="queryInput" name="queryInput" />
-                    <input id="editInput" type="hidden" name="editInput" />
-                    <input id="queryButton" type="submit" value="agregar" />
-                    </form>
-                </div>
-            </div>
-        </div>
+        <div class="panel-group">
+          <div class="panel panel-default">
+              <div class="panel-heading">Mis búsquedas</div>
+              <div class="panel-body">
+                  <ul class="list-group" >{mapQueries}</ul>
+                  <form onSubmit={this.handleQuery.bind(this)}>
+                  <input id="queryInput" name="queryInput" />
+                  <input id="editInput" type="hidden" name="editInput" />
+                  <input id="queryButton" type="submit" value="agregar" />
+                  </form>
+              </div>
+          </div>
+
 
 
 

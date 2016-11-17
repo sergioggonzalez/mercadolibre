@@ -1,29 +1,46 @@
 import React from 'react';
-import { FacebookLogin } from 'react-facebook-login-component';
+import FacebookLogin from 'react-facebook-login';
 
 class Login extends React.Component{
 
-  constructor (props, context) {
-    super(props, context);
-  }
+  constructor(props) {
+      super(props);
+  };
 
-  responseFacebook (response) {
+  responseFacebook = (response) => {
     console.log(response);
-    //anything else you want to do(save to localStorage)...
-  }
+    console.log(response.picture.data.url);
+    if(response.id){
+      console.log('Usuario logueado: '+ response.id);
+      this.props.changeUser(response.id, response.name);
+    }
+    //this.props.changeQuery(title);
+  };
 
   render () {
+    var button ='';
+    if (this.props.selectedUserId == '001') {
+      button = <FacebookLogin
+                appId="1712977212353438"
+                fields="name,email,picture"
+                callback={this.responseFacebook}
+                icon="fa-facebook"
+                size="small"
+                />;
+    }
+
     return (
-      <div>
-        <FacebookLogin socialId="1712986582352501"
-                       language="en_US"
-                       scope="public_profile,email"
-                       responseHandler={this.responseFacebook}
-                       xfbml={true}
-                       version="v2.5"
-                       class="facebook-login"
-                       buttonText="Login With Facebook"/>
-      </div>
+        <div class="panel-group">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                Bienvenido <strong>{this.props.selectedUserName}</strong>
+              </div>
+              <div class="panel-body">
+                {button}
+              </div>
+            </div>
+          </div>
+
     );
   }
 
