@@ -21,9 +21,6 @@ module.exports.setup = function (app) {
     api.route('/data/:query')
         .get(mongoStorage.getStoredMeliData);
 
-    /*api.route('/newdata/:query')
-        .get(meliData.getData);*/
-
     api.route('/:collection')
         .get(mongoStorage.findAllDocuments)
         .post(mongoStorage.addDocument);

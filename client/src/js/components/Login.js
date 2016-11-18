@@ -14,7 +14,6 @@ class Login extends React.Component{
       console.log('Usuario logueado: '+ response.id);
       this.props.changeUser(response.id, response.name, response.picture.data.url);
     }
-    //this.props.changeQuery(title);
   };
 
   render () {
