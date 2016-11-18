@@ -5,7 +5,8 @@ Analytics Example
 - [react.js](https://facebook.github.io/react/)
 - [redux.js](http://redux.js.org/)
 - [webpack](https://webpack.github.io/)
-- [Recharts](http://www.recharts.org/)
+- [Recharts](http://recharts.org/)
+- [Bootstap](http://getbootstrap.com/)
 
 ## Server side
 - [node.js](https://nodejs.org)
