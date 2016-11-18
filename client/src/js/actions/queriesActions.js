@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function fetchQueries(userId) {
-  var url = "http://localhost:3000/api/search?userId="+userId;
+  var url = "http://ec2-54-225-37-120.compute-1.amazonaws.com:3000/api/search?searchid="+userId;
   return function(dispatch) {
     axios.get(url)
       .then((response) => {
@@ -15,7 +15,7 @@ export function fetchQueries(userId) {
 
 export function addQuery(query, userId) {
   return function(dispatch) {
-    axios.post('http://localhost:3000/api/search', {
+    axios.post('http://ec2-54-225-37-120.compute-1.amazonaws.com:3000/api/search', {
       query: query,
       userId: userId
     }).then((response) => {
@@ -26,8 +26,8 @@ export function addQuery(query, userId) {
 
 export function updateQuery(id, query, userId) {
   return function(dispatch) {
-    var url = "http://localhost:3000/api/search/"+id;
-    axios.put(url, {
+    var url = "http://ec2-54-225-37-120.compute-1.amazonaws.com:3000/api/search/"+id;
+    axios.pu(url, {
       query: query,
       userId: userId
     }).then((response) => {
@@ -37,7 +37,7 @@ export function updateQuery(id, query, userId) {
 }
 
 export function deleteQuery(id) {
-  var url = "http://localhost:3000/api/search/"+id;
+  var url = "http://ec2-54-225-37-120.compute-1.amazonaws.com:3000/api/search/"+id;
   return function(dispatch){
     axios.delete(url).then((response) => {
       dispatch({type: "DELETE_QUERY", payload: response.data._id})
