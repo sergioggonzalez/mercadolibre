@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function fetchQueries(userId) {
-  var url = "http://ec2-54-225-37-120.compute-1.amazonaws.com:3000/api/search?searchid="+userId;
+  var url = "http://ec2-54-225-37-120.compute-1.amazonaws.com:3000/api/search?userId="+userId;
   return function(dispatch) {
     axios.get(url)
       .then((response) => {
